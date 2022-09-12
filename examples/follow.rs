@@ -61,7 +61,7 @@ fn setup(
                 .with(Position::new(start_pos))
                 .with(Rotation::new(dolly::glam::Quat::IDENTITY))
                 .with(Smooth::new_position(1.25).predictive(true))
-                .with(Arm::new(dolly::glam::Vec3::new(0.0, 1.5, -3.5)))
+                .with(Arm::new(dolly::glam::Vec3::new(0.0, 2.0, -6.5)))
                 .with(Smooth::new_position(0.5))
                 .with(YawPitch::new().yaw_degrees(180.0).pitch_degrees(-10.0))
                 .with(Smooth::new_rotation(1.5))
@@ -80,10 +80,11 @@ fn setup(
         .insert(MainCamera);
 
     commands
-        .spawn_bundle(Camera3dBundle {
-            transform: Transform::from_xyz(-2.0, 1., 5.0).looking_at(Vec3::ZERO, Vec3::Y),
-            ..default()
-        })
+        .spawn_bundle(Camera3dBundle::default())
+        // .spawn_bundle(Camera3dBundle {
+        //     transform: Transform::from_xyz(-2.0, 1., 5.0).looking_at(Vec3::ZERO, Vec3::Y),
+        //     ..default()
+        // })
         .insert(MainCamera);
 
     // light
@@ -112,7 +113,7 @@ fn update_camera(
 
 
     rig.driver_mut::<Arm>().offset.y = rig.driver_mut::<Arm>().offset.y.clamp(
-        1.0,
+        2.0,
         5.0,
     );
 }
